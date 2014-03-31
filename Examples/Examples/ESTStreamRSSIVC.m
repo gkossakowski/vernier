@@ -80,13 +80,12 @@
     [self sortBeaconsArray];
     if (self.beaconsArray.count > 0)
     {
-//        ESTBeacon *firstBeacon = [beacons firstObject];
         __block NSString* text = [NSString stringWithFormat:@"%i iBeacons", beacons.count];
         [self.beaconsArray enumerateObjectsUsingBlock:^(ESTBeacon* beacon, NSUInteger idx, BOOL *stop) {
             text = [text stringByAppendingFormat:@"\nMajor: %@, Minor: %@, RSSI: %i", beacon.major, beacon.minor, beacon.rssi];
         }];
         
-        self.zoneLabel.text     =  text; //[NSString stringWithFormat:@"%i iBeacons\nfoo", beacons.count];
+        self.zoneLabel.text     =  text;
     }
 }
 
