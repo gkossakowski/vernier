@@ -11,6 +11,7 @@
 #import "ESTDistanceDemoVC.h"
 #import "ESTProximityDemoVC.h"
 #import "ESTNotificationDemoVC.h"
+#import "ESTStreamRSSIVC.h"
 
 @implementation ESTViewController
 
@@ -58,6 +59,25 @@
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController: beaconTableVC]
                        animated:YES
                      completion:nil];
+}
+
+- (IBAction)showStreamRSSI:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Foo Bar"
+                                                    message:@"My message."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    ESTStreamRSSIVC *streamRSSIVC = [ESTStreamRSSIVC alloc];
+    
+//    ESTBeaconTableVC *beaconTableVC = [[ESTBeaconTableVC alloc] initWithCompletionHandler:^(ESTBeacon *beacon) {
+//        
+//        ESTDistanceDemoVC *distanceDemoVC = [[ESTDistanceDemoVC alloc] initWithBeacon:beacon];
+//        [self.navigationController pushViewController:distanceDemoVC animated:YES];
+//    }];
+    
+    [self.navigationController pushViewController:streamRSSIVC animated:YES];
 }
 
 @end

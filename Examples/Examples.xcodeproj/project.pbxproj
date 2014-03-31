@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31A3C14F18E8CC080009337B /* ESTStreamRSSIVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A3C14E18E8CC080009337B /* ESTStreamRSSIVC.m */; };
 		AC39C3BE18D72A6F00B38212 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC39C3BD18D72A6F00B38212 /* Foundation.framework */; };
 		AC39C3C018D72A6F00B38212 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC39C3BF18D72A6F00B38212 /* CoreGraphics.framework */; };
 		AC39C3C218D72A6F00B38212 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC39C3C118D72A6F00B38212 /* UIKit.framework */; };
@@ -25,6 +26,7 @@
 		AC39C3FB18D7346C00B38212 /* ESTProximityDemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AC39C3FA18D7346C00B38212 /* ESTProximityDemoVC.m */; };
 		AC39C3FE18D73DCB00B38212 /* ESTDistanceDemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AC39C3FD18D73DCB00B38212 /* ESTDistanceDemoVC.m */; };
 		AC39C40118D8564100B38212 /* ESTNotificationDemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AC39C40018D8564100B38212 /* ESTNotificationDemoVC.m */; };
+		D510456FE9E540F593802941 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C96FDB3EE65440594DF1D56 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31A3C14D18E8CC080009337B /* ESTStreamRSSIVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTStreamRSSIVC.h; sourceTree = "<group>"; };
+		31A3C14E18E8CC080009337B /* ESTStreamRSSIVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTStreamRSSIVC.m; sourceTree = "<group>"; };
+		4C96FDB3EE65440594DF1D56 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		94413D3C8405445ABA237F2A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		AC39C3BA18D72A6F00B38212 /* Examples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Examples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC39C3BD18D72A6F00B38212 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AC39C3BF18D72A6F00B38212 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -76,6 +82,7 @@
 				AC39C3C018D72A6F00B38212 /* CoreGraphics.framework in Frameworks */,
 				AC39C3C218D72A6F00B38212 /* UIKit.framework in Frameworks */,
 				AC39C3BE18D72A6F00B38212 /* Foundation.framework in Frameworks */,
+				D510456FE9E540F593802941 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +105,7 @@
 				AC39C3C318D72A6F00B38212 /* Examples */,
 				AC39C3BC18D72A6F00B38212 /* Frameworks */,
 				AC39C3BB18D72A6F00B38212 /* Products */,
+				94413D3C8405445ABA237F2A /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +127,7 @@
 				AC39C3BF18D72A6F00B38212 /* CoreGraphics.framework */,
 				AC39C3C118D72A6F00B38212 /* UIKit.framework */,
 				AC39C3DC18D72A6F00B38212 /* XCTest.framework */,
+				4C96FDB3EE65440594DF1D56 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -137,6 +146,8 @@
 				AC39C3FA18D7346C00B38212 /* ESTProximityDemoVC.m */,
 				AC39C3FC18D73DCB00B38212 /* ESTDistanceDemoVC.h */,
 				AC39C3FD18D73DCB00B38212 /* ESTDistanceDemoVC.m */,
+				31A3C14D18E8CC080009337B /* ESTStreamRSSIVC.h */,
+				31A3C14E18E8CC080009337B /* ESTStreamRSSIVC.m */,
 				AC39C3FF18D8564100B38212 /* ESTNotificationDemoVC.h */,
 				AC39C40018D8564100B38212 /* ESTNotificationDemoVC.m */,
 				AC39C3D518D72A6F00B38212 /* Images.xcassets */,
@@ -163,9 +174,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AC39C3EC18D72A6F00B38212 /* Build configuration list for PBXNativeTarget "Examples" */;
 			buildPhases = (
+				194408546ED44859BA214CD3 /* Check Pods Manifest.lock */,
 				AC39C3B618D72A6F00B38212 /* Sources */,
 				AC39C3B718D72A6F00B38212 /* Frameworks */,
 				AC39C3B818D72A6F00B38212 /* Resources */,
+				CDE33045C46A4D6FA0767E54 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -204,6 +217,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = com.estimote;
 				TargetAttributes = {
+					AC39C3B918D72A6F00B38212 = {
+						DevelopmentTeam = 2V3XBHQU4E;
+					};
 					AC39C3DA18D72A6F00B38212 = {
 						TestTargetID = AC39C3B918D72A6F00B38212;
 					};
@@ -248,11 +264,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		194408546ED44859BA214CD3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CDE33045C46A4D6FA0767E54 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AC39C3B618D72A6F00B38212 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31A3C14F18E8CC080009337B /* ESTStreamRSSIVC.m in Sources */,
 				AC39C3CA18D72A6F00B38212 /* main.m in Sources */,
 				AC39C3D418D72A6F00B38212 /* ESTViewController.m in Sources */,
 				AC39C3FB18D7346C00B38212 /* ESTProximityDemoVC.m in Sources */,
@@ -372,9 +422,12 @@
 		};
 		AC39C3ED18D72A6F00B38212 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94413D3C8405445ABA237F2A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Examples/Examples-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -385,15 +438,19 @@
 				INFOPLIST_FILE = "Examples/Examples-Info.plist";
 				LIBRARY_SEARCH_PATHS = ../EstimoteSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		AC39C3EE18D72A6F00B38212 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94413D3C8405445ABA237F2A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Examples/Examples-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -404,6 +461,7 @@
 				INFOPLIST_FILE = "Examples/Examples-Info.plist";
 				LIBRARY_SEARCH_PATHS = ../EstimoteSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
