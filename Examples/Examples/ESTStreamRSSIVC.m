@@ -86,6 +86,7 @@
         }];
         
         self.zoneLabel.text     =  text;
+        [self broadcastBeaconsInfo];
     }
 }
 
@@ -100,6 +101,32 @@
         }
     };
     self.beaconsArray = [self.beaconsArray sortedArrayUsingComparator: sortingFunction];
+}
+
+- (void)broadcastBeaconsInfo
+{
+    [self.beaconsArray enumerateObjectsUsingBlock:^(ESTBeacon* beacon, NSUInteger idx, BOOL *stop) {
+        [self broadcastBeaconInfo:beacon];
+    }];
+}
+
+- (void)broadcastBeaconInfo: (ESTBeacon*) beacon
+{
+    NSString *post = [NSString stringWithFormat:@"beaconMajor=%@&beaconMinor=%@&beaconRSSI=%i", beacon.major, beacon.minor, beacon.rssi];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:@"http://192.168.0.13:9000/beaconInfo"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    NSURLResponse *response;
+    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    NSString *theReply = [[NSString alloc] initWithBytes:[POSTReply bytes] length:[POSTReply length] encoding: NSASCIIStringEncoding];
+    NSLog(@"Reply: %@", theReply);
 }
 
 /*
