@@ -1,4 +1,4 @@
-Vernier - exploration of iBeacon-based location
+Vernier - an exploration of iBeacon-based location
 =======
 
 A small project that lets you collect RSSI samples using http server.
