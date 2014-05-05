@@ -11,6 +11,10 @@ import akka.actor.ActorRef;
 import play.libs.F;
 
 object Application extends Controller {
+  
+  def index = Action { request =>
+    Ok(views.html.index.render(request))
+  }
 
   def beaconInfo = Action { request =>
   	val paramsBody: Option[Map[String, Seq[String]]] = request.body.asFormUrlEncoded

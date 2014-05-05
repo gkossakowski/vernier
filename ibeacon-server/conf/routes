@@ -3,11 +3,11 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.WebSockets.index
+GET     /                           controllers.Application.index
 
 POST    /beaconInfo                 controllers.Application.beaconInfo
 
-GET     /ws                         controllers.WebSockets.ws
+GET     /ws                         controllers.ScalaWebSockets.ws
 GET     /sentiment/:symbol          controllers.StockSentiment.get(symbol)
 
 # Map static resources from the /public folder to the /assets URL path
