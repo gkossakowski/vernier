@@ -22,7 +22,7 @@ class UserActor(upstream: ActorRef) extends Actor {
       stockUpdateMessage.put("price", rssiUpdate.rssi.doubleValue)
       upstream ! stockUpdateMessage
     // push the history to the client
-    case stockHistory: StockHistory =>
+    case stockHistory: BeaconHistory =>
       val stockUpdateMessage = Json.newObject();
       stockUpdateMessage.put("type", "stockhistory")
       stockUpdateMessage.put("symbol", stockHistory.symbol)
@@ -31,7 +31,7 @@ class UserActor(upstream: ActorRef) extends Actor {
         historyJson.add((price).doubleValue)
       }
       upstream ! stockUpdateMessage
-    case allStock: AllStockSymbols =>
+    case allStock: AllBeaconSymbols =>
       for (symbol <- allStock.symbols.asScala) {
             System.out.println("Watching " + symbol)
             StocksActor.stocksActor ! new WatchBeacon(symbol)

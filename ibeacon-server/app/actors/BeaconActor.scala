@@ -20,34 +20,21 @@ class BeaconActor(symbol: String) extends Actor {
 
   protected[this] var watchers: HashSet[ActorRef] = HashSet.empty[ActorRef]
 
-
-
-  // A random data set which uses stockQuote.newPrice to get each data point
-  var stockHistory: Queue[java.lang.Double] = {
-    //lazy val initialPrices: Stream[java.lang.Double] = (new Random().nextDouble * 800) #:: initialPrices.map(previous => stockQuote.newPrice(previous))
+  var beaconHistory: Queue[java.lang.Double] = {
     Queue.fill(50)(-74)
   }
-
-  // Fetch the latest stock value every 75ms
-  //val stockTick = context.system.scheduler.schedule(Duration.Zero, 200.millis, self, FetchLatest)
 
   def receive = {
     case updateRSSI @ UpdateRSSI(symbol: String, rssi: Int) =>
       assert(this.symbol == symbol, s"${this.symbol} != $symbol")
       println(s"Received $updateRSSI")
-      stockHistory = stockHistory.drop(1) :+ new java.lang.Double(rssi)
+      beaconHistory = beaconHistory.drop(1) :+ new java.lang.Double(rssi)
       // notify watchers
       watchers.foreach(_ ! RSSIUpdate(symbol, rssi))
-/*    case FetchLatest =>
-      // add a new stock price to the history and drop the oldest
-      val newPrice = stockQuote.newPrice(stockHistory.last.doubleValue())
-      stockHistory = stockHistory.drop(1) :+ newPrice
-      // notify watchers
-      watchers.foreach(_ ! StockUpdate(symbol, newPrice))*/
     case msg@WatchBeacon(_) =>
       println(msg)
       // send the stock history to the user
-      sender ! StockHistory(symbol, stockHistory.asJava)
+      sender ! BeaconHistory(symbol, beaconHistory.asJava)
       // add the watcher to the list
       watchers = watchers + sender
     case msg@UnwatchStock(_) =>
@@ -80,7 +67,7 @@ class StocksActor extends Actor {
       println(s"Children size = ${context.children.size}")
       val symbols = context.children.toList.map(_.path.name).toList
       println(s"All children are $symbols")
-      sender ! AllStockSymbols(symbols.asJava)
+      sender ! AllBeaconSymbols(symbols.asJava)
   }
 }
 
@@ -93,11 +80,11 @@ case object FetchLatest
 
 case object FetchAllBeaconSymbols
 
-case class AllStockSymbols(symbols: java.util.List[String])
+case class AllBeaconSymbols(symbols: java.util.List[String])
 
 case class RSSIUpdate(symbol: String, rssi: Int)
 
-case class StockHistory(symbol: String, history: java.util.List[java.lang.Double])
+case class BeaconHistory(symbol: String, history: java.util.List[java.lang.Double])
 
 case class WatchBeacon(symbol: String)
 
