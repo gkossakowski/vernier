@@ -14,7 +14,7 @@ import play.libs.Akka
  * values.  Each StockActor updates a rolling dataset of randomly generated stock values.
  */
 
-class StockActor(symbol: String) extends Actor {
+class BeaconActor(symbol: String) extends Actor {
 
   lazy val stockQuote: StockQuote = new FakeStockQuote
 
@@ -37,14 +37,14 @@ class StockActor(symbol: String) extends Actor {
       println(s"Received $updateRSSI")
       stockHistory = stockHistory.drop(1) :+ new java.lang.Double(rssi)
       // notify watchers
-      watchers.foreach(_ ! StockUpdate(symbol, rssi))
+      watchers.foreach(_ ! RSSIUpdate(symbol, rssi))
 /*    case FetchLatest =>
       // add a new stock price to the history and drop the oldest
       val newPrice = stockQuote.newPrice(stockHistory.last.doubleValue())
       stockHistory = stockHistory.drop(1) :+ newPrice
       // notify watchers
       watchers.foreach(_ ! StockUpdate(symbol, newPrice))*/
-    case msg@WatchStock(_) =>
+    case msg@WatchBeacon(_) =>
       println(msg)
       // send the stock history to the user
       sender ! StockHistory(symbol, stockHistory.asJava)
@@ -62,12 +62,12 @@ class StocksActor extends Actor {
       // get or create the StockActor for the symbol and forward this message
       context.child(symbol).getOrElse {
         println(s"Creating a new actor for $symbol, self = $self")
-        context.actorOf(Props(new StockActor(symbol)), symbol)
+        context.actorOf(Props(new BeaconActor(symbol)), symbol)
       } forward updateRSSI
-    case watchStock @ WatchStock(symbol) =>
+    case watchStock @ WatchBeacon(symbol) =>
       // get or create the StockActor for the symbol and forward this message
       context.child(symbol).getOrElse {
-        context.actorOf(Props(new StockActor(symbol)), symbol)
+        context.actorOf(Props(new BeaconActor(symbol)), symbol)
       } forward watchStock
     case unwatchStock @ UnwatchStock(Some(symbol)) =>
       // if there is a StockActor for the symbol forward this message
@@ -75,7 +75,7 @@ class StocksActor extends Actor {
     case unwatchStock @ UnwatchStock(None) =>
       // if no symbol is specified, forward to everyone
       context.children.foreach(_.forward(unwatchStock))
-    case FetchAllStockSymbols =>
+    case FetchAllBeaconSymbols =>
       println(s"61955_13474: ${context.child("61955_13474").isDefined}, self = $self")
       println(s"Children size = ${context.children.size}")
       val symbols = context.children.toList.map(_.path.name).toList
@@ -91,15 +91,15 @@ object StocksActor {
 
 case object FetchLatest
 
-case object FetchAllStockSymbols
+case object FetchAllBeaconSymbols
 
 case class AllStockSymbols(symbols: java.util.List[String])
 
-case class StockUpdate(symbol: String, price: Number)
+case class RSSIUpdate(symbol: String, rssi: Int)
 
 case class StockHistory(symbol: String, history: java.util.List[java.lang.Double])
 
-case class WatchStock(symbol: String)
+case class WatchBeacon(symbol: String)
 
 case class UpdateRSSI(symbol: String, rssi: Int)
 

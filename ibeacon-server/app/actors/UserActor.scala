@@ -7,19 +7,19 @@ import play.libs.Json
 import scala.collection.JavaConverters._
 
 class UserActor(upstream: ActorRef) extends Actor {
-  StocksActor.stocksActor ! FetchAllStockSymbols
+  StocksActor.stocksActor ! FetchAllBeaconSymbols
   def receive = {
     case jsonNode: JsonNode =>
       // parse the JSON into WatchStock
-      val watchStock = new WatchStock(jsonNode.get("symbol").textValue());
+      val watchStock = new WatchBeacon(jsonNode.get("symbol").textValue());
       // send the watchStock message to the StocksActor
       StocksActor.stocksActor ! watchStock
-    case stockUpdate: StockUpdate =>
+    case rssiUpdate: RSSIUpdate =>
       // push the stock to the client
       val stockUpdateMessage = Json.newObject()
       stockUpdateMessage.put("type", "stockupdate");
-      stockUpdateMessage.put("symbol", stockUpdate.symbol)
-      stockUpdateMessage.put("price", stockUpdate.price.doubleValue)
+      stockUpdateMessage.put("symbol", rssiUpdate.symbol)
+      stockUpdateMessage.put("price", rssiUpdate.rssi.doubleValue)
       upstream ! stockUpdateMessage
     // push the history to the client
     case stockHistory: StockHistory =>
@@ -34,7 +34,7 @@ class UserActor(upstream: ActorRef) extends Actor {
     case allStock: AllStockSymbols =>
       for (symbol <- allStock.symbols.asScala) {
             System.out.println("Watching " + symbol)
-            StocksActor.stocksActor ! new WatchStock(symbol)
+            StocksActor.stocksActor ! new WatchBeacon(symbol)
       }
   }
 }
